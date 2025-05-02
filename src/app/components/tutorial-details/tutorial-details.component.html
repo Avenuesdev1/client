@@ -1,5 +1,5 @@
 <div *ngIf="viewMode; else editable">
-  <div *ngIf="currentTutorial.id">
+  <div *ngIf="currentTutorial?.id">
     <h4>Tutorial</h4>
     <div>
       <label><strong>Title:</strong></label> {{ currentTutorial.title }}
@@ -13,8 +13,7 @@
       {{ currentTutorial.published ? "Published" : "Pending" }}
     </div>
 
-    <a class="badge badge-warning"
-      routerLink="/tutorials/{{ currentTutorial.id }}">
+    <a class="badge badge-warning" [routerLink]="['/tutorials', currentTutorial.id]">
       Edit
     </a>
   </div>
@@ -26,7 +25,7 @@
 </div>
 
 <ng-template #editable>
-  <div *ngIf="currentTutorial.id" class="edit-form">
+  <div *ngIf="currentTutorial?.id" class="edit-form">
     <h4>Tutorial</h4>
     <form>
       <div class="form-group">
@@ -85,7 +84,7 @@
     <p>{{ message }}</p>
   </div>
 
-  <div *ngIf="!currentTutorial.id">
+  <div *ngIf="!currentTutorial?.id">
     <br />
     <p>Cannot access this Tutorial...</p>
   </div>

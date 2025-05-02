@@ -27,16 +27,14 @@ export class TutorialDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.viewMode) {
-      this.message = '';
-      this.getTutorial(this.route.snapshot.params['id']);
+      this.getTutorial(Number(this.route.snapshot.params['id'])); // Convert id to number
     }
   }
 
-  getTutorial(id: string): void {
+  getTutorial(id: number): void { // Change id type to number
     this.tutorialService.get(id).subscribe({
       next: (data) => {
         this.currentTutorial = data;
-        console.log(data);
       },
       error: (e) => console.error(e)
     });
@@ -49,40 +47,27 @@ export class TutorialDetailsComponent implements OnInit {
       published: status
     };
 
-    this.message = '';
-
-    this.tutorialService.update(this.currentTutorial.id, data).subscribe({
+    this.tutorialService.update(this.currentTutorial.id!, data).subscribe({ // Use non-null assertion
       next: (res) => {
-        console.log(res);
         this.currentTutorial.published = status;
-        this.message = res.message
-          ? res.message
-          : 'The status was updated successfully!';
+        this.message = (res as any).message || 'The status was updated successfully!'; // Cast to any to access message
       },
       error: (e) => console.error(e)
     });
   }
 
   updateTutorial(): void {
-    this.message = '';
-
-    this.tutorialService
-      .update(this.currentTutorial.id, this.currentTutorial)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.message = res.message
-            ? res.message
-            : 'This tutorial was updated successfully!';
-        },
-        error: (e) => console.error(e)
-      });
+    this.tutorialService.update(this.currentTutorial.id!, this.currentTutorial).subscribe({ // Use non-null assertion
+      next: (res) => {
+        this.message = (res as any).message || 'This tutorial was updated successfully!'; // Cast to any to access message
+      },
+      error: (e) => console.error(e)
+    });
   }
 
   deleteTutorial(): void {
-    this.tutorialService.delete(this.currentTutorial.id).subscribe({
+    this.tutorialService.delete(this.currentTutorial.id!).subscribe({ // Use non-null assertion
       next: (res) => {
-        console.log(res);
         this.router.navigate(['/tutorials']);
       },
       error: (e) => console.error(e)
