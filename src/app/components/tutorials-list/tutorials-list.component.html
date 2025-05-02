@@ -24,7 +24,7 @@
       <li
         class="list-group-item"
         *ngFor="let tutorial of tutorials; let i = index"
-        [class.active]="i == currentIndex"
+        [class.active]="i === currentIndex"
         (click)="setActiveTutorial(tutorial, i)"
       >
         {{ tutorial.title }}

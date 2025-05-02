@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AddTutorialComponent } from './add-tutorial.component';
 
 describe('AddTutorialComponent', () => {
@@ -9,7 +8,8 @@ describe('AddTutorialComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AddTutorialComponent]
-    });
+    }).compileComponents(); // Added compileComponents for better practice
+
     fixture = TestBed.createComponent(AddTutorialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

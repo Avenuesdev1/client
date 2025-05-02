@@ -22,7 +22,6 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 <div>
   <div class="submit-form">
-    <div *ngIf="!submitted">
+    <ng-container *ngIf="!submitted; else submittedTemplate">
       <div class="form-group">
         <label for="title">Title</label>
         <input
@@ -25,11 +25,11 @@
       </div>
 
       <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
-    </div>
+    </ng-container>
 
-    <div *ngIf="submitted">
+    <ng-template #submittedTemplate>
       <h4>Tutorial was submitted successfully!</h4>
       <button class="btn btn-success" (click)="newTutorial()">Add</button>
-    </div>
+    </ng-template>
   </div>
 </div>
